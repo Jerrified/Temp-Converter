@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Temp Converter</title>
+    </head>
+    <body>
+        <form id="form1" method="get">
+            <table>
+               <tr>
+                  <th>Fahrenheit</th>
+                  <th>Celsius</th>
+                  <th>Kelvin</th>
+               </tr>
+               <tr>
+                  <td><input type="text" id="degF" onchange="convertTemp('F')" size="10" maxlength="10" /></td>
+                  <td><input type="text" id="degC" onchange="convertTemp('C')" size="10" maxlength="10" /></td>
+                  <td><input type="text" id="degK" onchange="convertTemp('K')" size="10" maxlength="10" /></td>
+               </tr>
+            </table>
+            <p>
+               To compute temperatures, enter a numeric value into one of the boxes and then hit Enter / Return or move to another text box.<br />
+               The value you entered will have a white background. The computed fields will have a pink background.
+            </p>
+         </form>
+        <script type="text/javascript">
+			function convertTemp(type) {
+				var docF = document.getElementById("degF");
+				var docC = document.getElementById("degC");
+				var docK = document.getElementById("degK");
+				var tempF;
+				var tempC;
+				var tempK;
+				
+				docF.style.backgroundColor = '#fee';
+				docC.style.backgroundColor = '#fee';
+				docK.style.backgroundColor = '#fee';
+						
+				switch(type) {
+					case 'F':
+						tempF = Number(docF.value);
+						docF.style.backgroundColor = '#fff';
+						tempC = (tempF - 32) * (5 / 9);
+						tempK = (tempF + 459.67) * (5 / 9);
+						break;
+					case 'C':
+						tempC = Number(docC.value);
+						docC.style.backgroundColor = '#fff';
+						tempF = (tempC * (9 / 5)) + 32;
+						tempK = tempC + 273.15;
+						break;
+					default:
+						tempK = Number(docK.value);
+						docK.style.backgroundColor = '#fff';
+						tempF = (tempK * (9 / 5)) - 459.67;
+						tempC = tempK - 273.15;
+				}
+				
+				docF.value = tempF;
+				docC.value = tempC;
+				docK.value = tempK;
+			}
+        </script>
+    </body>
+</html>
